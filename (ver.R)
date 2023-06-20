@@ -1,0 +1,20 @@
+# R 언어 버전
+# 패키지 설치 및 로드
+install.packages('readxl')
+library(readxl)
+# 엑셀 파일 불러오기
+data <- read.csv("C:/Study/Data/범죄도시3_리뷰_단어빈도수.csv", fileEncoding = "euc-kr")
+View(data)
+
+# 워드클라우드 패키지 설치
+install.packages("RColorBrewer")
+install.packages("wordcloud")
+library(RColorBrewer)
+library(wordcloud)
+
+table1<-table(data)
+table2<-sort(table1, decreasing = T)
+
+# 워드클라우드
+color<-brewer.pal(8, "Accent")
+wordcloud(word=data$단어, freq=data$빈도수, min.freq=1, max.words=70, random.order = F, rot.per=.1,scale=c(4, 0.3), colors=color)
