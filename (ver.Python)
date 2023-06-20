@@ -1,0 +1,27 @@
+# Python 언어 버전
+# 패키지 로드 및 엑셀 파일 로드
+import pandas as pd
+import matplotlib 
+from matplotlib import rc
+import matplotlib.font_manager as fm
+import matplotlib.pyplot as plt
+import numpy as np
+# 메인 데이터 불러오기
+plt.rcParams["font.family"] = "NanumGothic"
+movie= pd.read_csv('C:/Study/Data/범죄도시3_리뷰_단어빈도수.csv', encoding='euc-kr') 
+movie
+
+# 워드클라우드 설치
+!pip install wordcloud
+from wordcloud import WordCloud
+wc = movie.set_index("단어").to_dict()["빈도수"]
+
+wc
+
+wordcloud = WordCloud(font_path = 'C:/Windows/Fonts/malgun.ttf', background_color='white',colormap = "Accent_r",
+                      width=1500, height=1000).generate_from_frequencies(wc)
+
+plt.imshow(wordcloud)
+plt.axis('off')
+plt.title('<범죄도시3 리뷰에서 자주 출현한 단어>', fontsize = 15, pad=30)
+plt.show()
